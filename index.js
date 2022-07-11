@@ -3,6 +3,7 @@
 import inquirer from "inquirer";
 import fs from "fs";
 import { createSpinner } from "nanospinner";
+import gradient from 'gradient-string';
 
 const banner = `
 ▀█████████▄     ▄████████    ▄████████     ███      ▄█   ▄██████▄  ███▄▄▄▄   
@@ -14,17 +15,19 @@ const banner = `
   ███    ███   ███    ███    ▄█    ███     ███     ███  ███    ███ ███   ███ 
 ▄█████████▀    ███    █▀   ▄████████▀     ▄████▀   █▀    ▀██████▀   ▀█   █▀  
                                                                              `;
+
 function welcome() {
   console.clear();
-  console.log(banner);
-  console.log(
+  console.log(customgradient(banner));
+  console.log(customgradient(
     "                                                     by MecPerspicace | v1.0"
-  );
-  console.log(
-    "\nFor $EGLD donation : erd19jcvvj7v7re6pnmypjds2yvlzrwdvp0l8lxr5qn2mdlns7jt8xrqtccly5"
-  );
+  ));
+  console.log(customgradient(
+    "For $EGLD donation : erd19jcvvj7v7re6pnmypjds2yvlzrwdvp0l8lxr5qn2mdlns7jt8xrqtccly5\n"
+  ));
 }
 
+let customgradient = gradient('yellow', 'green');
 let upper = false;
 let lower = false;
 let numbers = false;
@@ -36,7 +39,7 @@ async function upper_choice() {
   const answers = await inquirer.prompt({
     name: "uppercase",
     type: "list",
-    message: "Do you want uppercase letters",
+    message: customgradient("Do you want uppercase letters"),
     choices: ["Yes", "No"],
   });
 
@@ -49,7 +52,7 @@ async function lower_choice() {
   const answers = await inquirer.prompt({
     name: "lowercase",
     type: "list",
-    message: "Do you want lowercase letters",
+    message: customgradient("Do you want lowercase letters"),
     choices: ["Yes", "No"],
   });
 
@@ -62,7 +65,7 @@ async function numbers_choice() {
   const answers = await inquirer.prompt({
     name: "numbers",
     type: "list",
-    message: "Do you want numbers",
+    message: customgradient("Do you want numbers"),
     choices: ["Yes", "No"],
   });
 
@@ -75,7 +78,7 @@ async function symbols_choice() {
   const answers = await inquirer.prompt({
     name: "symbols",
     type: "list",
-    message: "Do you want symbols",
+    message: customgradient("Do you want symbols"),
     choices: ["Yes", "No"],
   });
 
@@ -88,7 +91,7 @@ async function lenght_choice() {
   const answers = await inquirer.prompt({
     name: "lenght",
     type: "input",
-    message: "Enter the lenght of passwords",
+    message: customgradient("Enter the lenght of passwords"),
     default() {
       return 16;
     },
@@ -101,7 +104,7 @@ async function amount_choice() {
   const answers = await inquirer.prompt({
     name: "amount",
     type: "input",
-    message: "Enter the amount of passwords",
+    message: customgradient("Enter the amount of passwords"),
     default() {
       return 100;
     },
@@ -162,12 +165,12 @@ function generate_passwords(upper, lower, nums, symbol, lenght, amount) {
 
   var fd = fs.openSync("passwords.txt", "a");
 
-  passwords.forEach((p) => fs.writeSync(fd, p.toString()));
+  passwords.forEach((p) => fs.writeSync(fd, "\n" + p.toString()));
 
   fs.closeSync(fd);
 
   spinner.success({
-    text: `Successfully write ${amount} passwords in passwords.txt`,
+    text: customgradient(`Successfully write ${amount} passwords in passwords.txt`),
   });
 }
 
