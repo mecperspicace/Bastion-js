@@ -9,10 +9,10 @@ Lightweight and easy-to-use node js script to generate passwords
 Download with github :
 
 ```bash
-  git clone https://github.com/mecperspicace/Bastion-js.git
-  cd Bastion-js
-  npm i
-  node ./index.js
+git clone https://github.com/mecperspicace/Bastion-js.git
+cd Bastion-js
+npm i
+node ./index.js
 ```
     
 
